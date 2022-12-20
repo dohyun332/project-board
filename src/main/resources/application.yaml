@@ -1,0 +1,42 @@
+# JPA에 접근하기 위한 Property들을 세팅
+# yaml은 xml이나 json 같이 데이터를 주고 받을때 사용하는 포맷이 정의되어 있는 파일
+# xml이나 json보다 코드가 간결하다. 쿠버네티스(플랫폼)에서도 야물을 권장하고 있다.
+# CRUD를 간편하게 하기위해서 하는것
+
+debug: false
+# 스프링부트의 모든 디버그 로그를 다볼수 있게 할건지 결정, 너무 많아서 일단 false로 설정
+management.endpoints.web.exposure.include: "*"
+# actuator의 endpoint의 감춰져있는 것들을 다 볼 수 있게한다.(엔드포인트들이 기본은 다숨겨져 있음)
+# (그래야 개발할때 보고 싶은 기능들을 다 볼 수 있다.)
+
+logging:
+  level:
+    com.com.bitstudy.app: debug # 루트 패키지에서 발행하는 모든 로그는 debug레벨로 보겠다는 의미
+    org.springframework.web.servlet: debug
+    # 맨 위에 debug와 관련 있는 것으로 위에 것을 false를 놓고 request와 response 로그만 따로 뽑아 보겠다
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    # JPA기술을 사용할때 쿼리 로그를 디버그 로그로 관찰할 수 있는데 이때 안에 들어가는 파라미터들이
+    # 전부 물음표로 나온다. 그걸 볼 수 있게 해주는거.(TODO: 이슈확인 필요)
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/board
+    username: kh_user
+    password: 1111
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 증복되서 cj가 들어감
+  jpa:
+    defer-datasource-initialization: true
+    # test용 데이터베이스의 데이터를 생성 할 수 있게 해줌, 나중에 resources 안에 data.sql(무조건 있어야함) 파일 만들어서 DB에 초기 데이터를 테스트용으로 넣을 수 있다.
+    hibernate.ddl-auto: create
+    # 엔티티를 보고 테이블 데이터를 유추해서 자동으로 DDL데이터를 만들어준다. domain > Article 앤티티를 보고 create table 구문을 만들어서 테스트 실행될때마다 자동으로 Article과 ArticleComment 테이블 생성(우리가 별도로 짜지 않아도 됨)
+    show-sql: true # 디버그 모드에서 sql 문장 보여줄까 하는거
+    properties:
+      hibernate.format_sql: true
+      hibernate.default_batch_fetch_size: 100
+
+
+  h2.console.enabled: false # h2 콘솔을 활성화 할건지 정하는 부분
+  sql.init.mode: always # data.sql를 언제 작동하게 할건지 결정하는 부분
+  # never(절대사용안함), always, embedded
+  # 강의 예제니까 실제화면에서 볼때도 테스트때 사용했던 데이터들도 이용할거라서 그냥 always로 합시다.
