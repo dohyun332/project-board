@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 
 @Table(indexes = {
         @Index(columnList = "content"),
-        @Index(columnList = "createdAt"),
-        @Index(columnList = "createdBy")
+        @Index(columnList = "createAt"),
+        @Index(columnList = "createBy")
 })
 @Entity /* 테이블과의 매핑한다는 뜻,
            JPA가 관리한다.
@@ -49,11 +49,11 @@ public class ArticleComment {
     // 메타데이터
     @CreatedDate
     @Column(nullable = false)
-    private LocalDateTime createdAt; // 생성일시
+    private LocalDateTime createAt; // 생성일시
 
     @CreatedBy
     @Column(nullable = false, length = 100)
-    private String createdBy; // 생성자
+    private String createBy; // 생성자
 
     @LastModifiedDate
     @Column(nullable = false)

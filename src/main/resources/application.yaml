@@ -38,5 +38,5 @@ spring:
 
   h2.console.enabled: false # h2 콘솔을 활성화 할건지 정하는 부분
   sql.init.mode: always # data.sql를 언제 작동하게 할건지 결정하는 부분
-  # never(절대사용안함), always, embedded
+  # never(절대사용안함), always, embedded 
   # 강의 예제니까 실제화면에서 볼때도 테스트때 사용했던 데이터들도 이용할거라서 그냥 always로 합시다.
