@@ -21,7 +21,8 @@ import java.time.LocalDateTime;
            PK가 알아볼수 있게 필드들 중 하나에 @Id 어노테이션 달아줘야 한다. */
 @Getter
 @ToString
-public class Ex01_2_ArticleComment_엔티티로변경 {
+
+public class Ex02_2_ArticleComment_바인딩설정 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
