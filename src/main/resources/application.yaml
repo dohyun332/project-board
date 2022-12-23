@@ -20,11 +20,18 @@ logging:
 
 spring:
   datasource:
+# h2용도로 바꾸기위해 주석처리
     url: jdbc:mysql://localhost:3306/board
     username: kh_user
     password: 1111
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 증복되서 cj가 들어감
+
+  # h2용도 #
+#  url: jdbc:h2:mem:testdb
+#  username: sa
+#  driver-class-name: org.h2.Driver
+
   jpa:
     defer-datasource-initialization: true
     # test용 데이터베이스의 데이터를 생성 할 수 있게 해줌, 나중에 resources 안에 data.sql(무조건 있어야함) 파일 만들어서 DB에 초기 데이터를 테스트용으로 넣을 수 있다.
@@ -36,7 +43,8 @@ spring:
       hibernate.default_batch_fetch_size: 100
 
 
-  h2.console.enabled: false # h2 콘솔을 활성화 할건지 정하는 부분
+   h2.console.enabled: false # h2 콘솔을 활성화 할건지 정하는 부분
+#  h2.console.enabled: true # h2 DB를 사용할때
   sql.init.mode: always # data.sql를 언제 작동하게 할건지 결정하는 부분
   # never(절대사용안함), always, embedded
   # 강의 예제니까 실제화면에서 볼때도 테스트때 사용했던 데이터들도 이용할거라서 그냥 always로 합시다.
