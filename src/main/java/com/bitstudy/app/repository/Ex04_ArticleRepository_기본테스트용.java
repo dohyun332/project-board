@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *   1) 클래스 이름에서 우클릭 > Go to > Test(ctrl + shift + T)
  *   2) JUnit5 버전인지 확인
  *   3) Test에 경로가 같게 생성되는지 확인 후 ok
+ *   4) 이름 ArticleRepositoryTest를 JpaRepositoryTest로 변경
  */
 public interface Ex04_ArticleRepository_기본테스트용 extends JpaRepository<Article, Long> {
 }
