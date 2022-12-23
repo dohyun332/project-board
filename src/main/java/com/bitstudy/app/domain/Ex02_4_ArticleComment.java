@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 
-public class ArticleComment extends AuditingFields {
+public class Ex02_4_ArticleComment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,20 +47,20 @@ public class ArticleComment extends AuditingFields {
     private String content; // 본문
 
     // 메타데이터
-//    @CreatedDate
-//    @Column(nullable = false)
-//    private LocalDateTime createAt; // 생성일시
-//
-//    @CreatedBy
-//    @Column(nullable = false, length = 100)
-//    private String createBy; // 생성자
-//
-//    @LastModifiedDate
-//    @Column(nullable = false)
-//    private LocalDateTime modifiedAt; // 수정일시
-//
-//    @LastModifiedBy
-//    @Column(nullable = false, length = 100)
-//    private String modifiedBy; // 수정자
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDateTime createAt; // 생성일시
+
+    @CreatedBy
+    @Column(nullable = false, length = 100)
+    private String createBy; // 생성자
+
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime modifiedAt; // 수정일시
+
+    @LastModifiedBy
+    @Column(nullable = false, length = 100)
+    private String modifiedBy; // 수정자
 
 }

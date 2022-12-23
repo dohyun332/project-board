@@ -21,17 +21,16 @@ logging:
 spring:
   datasource:
 # h2용도로 바꾸기위해 주석처리
-#    url: jdbc:mysql://localhost:3306/board
-#    username: kh_user
-#    password: 1111
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/board
+    username: kh_user
+    password: 1111
+    driver-class-name: com.mysql.cj.jdbc.Driver
     # 증복되서 cj가 들어감
 
   # h2용도 #
-  url: jdbc:h2:mem:testdb
-  username: sa
-  driver-class-name: org.h2.Driver
-
+#  url: jdbc:h2:mem:testdb
+#  username: sa
+#  driver-class-name: org.h2.Driver
 
   jpa:
     defer-datasource-initialization: true
