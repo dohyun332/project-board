@@ -7,8 +7,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.awt.*;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -38,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @WebMvcTest
-public class DataRestTest {
+public class Ex07_1_DataRestTest_실패하는테스트 {
     /** MockMvc 테스트 방법 5가지가 있다.
      * 1) MockMvc 생성(빈 준비)
      * 2) MockMvc에게 요청에 대한 정보를 입력
@@ -48,7 +46,7 @@ public class DataRestTest {
 
     private final MockMvc mvc; // 1) MockMvc 생성(빈 준비)
 
-    public DataRestTest(@Autowired MockMvc mvc) { // 2) MockMvc에게 요청에 대한 정보를 입력
+    public Ex07_1_DataRestTest_실패하는테스트(@Autowired MockMvc mvc) { // 2) MockMvc에게 요청에 대한 정보를 입력
         this.mvc = mvc;
     }
 

@@ -2,6 +2,7 @@ package com.bitstudy.app.repository;
 
 import com.bitstudy.app.domain.ArticleComment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /** TDD를 위해서 임시로 만들어 놓은 저장소(이것으로 DB 접근), DAO의 역할
  *
@@ -12,5 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *   4) 이름 ArticleRepositoryTest를 JpaRepositoryTest로 변경
  */
 
+@RepositoryRestResource
 public interface ArticleCommentRepository extends JpaRepository<ArticleComment, Long> {
 }
