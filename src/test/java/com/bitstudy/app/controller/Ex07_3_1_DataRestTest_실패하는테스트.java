@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @WebMvcTest
-public class Ex07_3_DataRestTest_실패하는테스트 {
+public class Ex07_3_1_DataRestTest_실패하는테스트 {
     /** MockMvc 테스트 방법 5가지가 있다.
      * 1) MockMvc 생성(빈 준비)
      * 2) MockMvc에게 요청에 대한 정보를 입력
@@ -46,7 +46,7 @@ public class Ex07_3_DataRestTest_실패하는테스트 {
 
     private final MockMvc mvc; // 1) MockMvc 생성(빈 준비)
 
-    public Ex07_3_DataRestTest_실패하는테스트(@Autowired MockMvc mvc) { // 2) MockMvc에게 요청에 대한 정보를 입력
+    public Ex07_3_1_DataRestTest_실패하는테스트(@Autowired MockMvc mvc) { // 2) MockMvc에게 요청에 대한 정보를 입력
         this.mvc = mvc;
     }
 
