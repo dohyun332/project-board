@@ -13,8 +13,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  *   4) 이름 ArticleRepositoryTest를 JpaRepositoryTest로 변경
  */
 
-
-
 /**
  *
  *  HAL 확인해보기 서비스 실행 하고, 브라우저에서 localhost:8080/api 넣기

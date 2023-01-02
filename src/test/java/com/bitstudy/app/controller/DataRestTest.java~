@@ -75,7 +75,7 @@ public class DataRestTest {
             그래서 일단 @WebMvcTest 대신 통합테스트(@SpringBootTest)로 돌릴거다.
          */
 
-        mvc.perform(get("/api/articles"))
+        mvc.perform(get("api/articles"))
                 .andExpect(status().isOk()) // 현재 200이 들어왔는지 확인
                                             // MockMvcResultMatchers.status
                 .andExpect(content().contentType(MediaType.valueOf("application/hal+json")));

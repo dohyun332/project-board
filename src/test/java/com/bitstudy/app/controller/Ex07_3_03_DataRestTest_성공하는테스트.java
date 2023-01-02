@@ -40,10 +40,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest /* 이것만 있으면 MockMvc를 알아볼수가 없어서 @AutoConfigureMockMvc도 같이넣기 */
 @AutoConfigureMockMvc
 @Transactional /* 테스트를 돌리면 Hibernate부분에 select 쿼리문이 나오면서 실제 DB를 건드리는데, 테스트 끝난이후에 DB를 롤백시키는 용도*/
-public class Ex07_03_2_DataRestTest_성공하는테스트 {
+public class Ex07_3_03_DataRestTest_성공하는테스트 {
     private final MockMvc mvc; // 1) MockMvc 생성(빈 준비)
 
-    public Ex07_03_2_DataRestTest_성공하는테스트(@Autowired MockMvc mvc) { // 2) MockMvc에게 요청에 대한 정보를 입력
+    public Ex07_3_03_DataRestTest_성공하는테스트(@Autowired MockMvc mvc) { // 2) MockMvc에게 요청에 대한 정보를 입력
         this.mvc = mvc;
     }
 
