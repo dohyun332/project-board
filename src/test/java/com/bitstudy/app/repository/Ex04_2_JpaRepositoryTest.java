@@ -55,7 +55,7 @@ class Ex04_2_JpaRepositoryTest {
                          primary key로 레코드 한 건 조회
                          ()안에 글번호를 넣어줘야 한다.
          3) save() - 레코드 저장할 때 사용(insert, update)
-                   - saveAndFlush() : 실제로 동작까지 하도록 하는 함수
+                   - saveAndFlush()
          4) count() - 레코드 개수 뽑을 때 사용
          5) delete() - 레코드 삭제
          ----------------------------------------------------------
