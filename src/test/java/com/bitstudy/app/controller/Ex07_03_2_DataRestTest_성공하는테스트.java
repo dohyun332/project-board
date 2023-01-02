@@ -4,13 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
-import java.awt.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -42,10 +40,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest /* 이것만 있으면 MockMvc를 알아볼수가 없어서 @AutoConfigureMockMvc도 같이넣기 */
 @AutoConfigureMockMvc
 @Transactional /* 테스트를 돌리면 Hibernate부분에 select 쿼리문이 나오면서 실제 DB를 건드리는데, 테스트 끝난이후에 DB를 롤백시키는 용도*/
-public class DataRestTest {
+public class Ex07_03_2_DataRestTest_성공하는테스트 {
     private final MockMvc mvc; // 1) MockMvc 생성(빈 준비)
 
-    public DataRestTest(@Autowired MockMvc mvc) { // 2) MockMvc에게 요청에 대한 정보를 입력
+    public Ex07_03_2_DataRestTest_성공하는테스트(@Autowired MockMvc mvc) { // 2) MockMvc에게 요청에 대한 정보를 입력
         this.mvc = mvc;
     }
 
@@ -80,14 +78,6 @@ public class DataRestTest {
     @Test
     void articleCommentOne() throws Exception {
         mvc.perform(get("/api/articleComments/1"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.valueOf("application/hal+json")));
-    }
-
-    @DisplayName("[api] - 게시글 댓글 리스트 조회 ")
-    @Test
-    void articleCommentAllByArticle() throws Exception {
-        mvc.perform(get("/api/articles/1/articleComments"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.valueOf("application/hal+json")));
     }

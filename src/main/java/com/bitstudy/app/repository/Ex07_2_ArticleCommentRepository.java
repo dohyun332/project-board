@@ -1,9 +1,8 @@
 package com.bitstudy.app.repository;
 
-import com.bitstudy.app.domain.Article;
+import com.bitstudy.app.domain.ArticleComment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
 
 /** TDD를 위해서 임시로 만들어 놓은 저장소(이것으로 DB 접근), DAO의 역할
  *
@@ -14,15 +13,14 @@ import org.springframework.data.rest.webmvc.RepositoryRestController;
  *   4) 이름 ArticleRepositoryTest를 JpaRepositoryTest로 변경
  */
 
-/** 할일 - 클래스 레벨에 @RepositoryRestResource 넣어서 해당 클래스를 spring rest data 사용할 준비 시켜놓기
+/**
  *
- */
+ *  HAL 확인해보기 서비스 실행 하고, 브라우저에서 localhost:8080/api 넣기
+ *
+ *  테스트 만들기 (test > controller > Ex07_3_DataRestTest_실패하는테스트.java)
+ *
+ * */
 
-/* HAL안될때
-   1. ctrl+shift+R로 새로고침(캐시없애고 새로고침)
-   2. @RepositoryRestController 넣지 않게 조심
-   3. dependency rest, rest HAL 다 있는지 확인
- */
 @RepositoryRestResource
-public interface ArticleRepository extends JpaRepository<Article, Long> {
+public interface Ex07_2_ArticleCommentRepository extends JpaRepository<ArticleComment, Long> {
 }
