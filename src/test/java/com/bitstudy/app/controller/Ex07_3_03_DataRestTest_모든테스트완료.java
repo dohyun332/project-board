@@ -1,17 +1,14 @@
 package com.bitstudy.app.controller;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
-import java.awt.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -28,11 +25,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     1) @WebMvcTest - 슬라이스 테스트에서 대표적인 어노테이션, 컨테이너로 건드리는 녀석
                      - Controller를 테스트 할 수 있드록 관련 설정을 제공해준다.
                        @WebMvcTest를 선언하면 web과 관련된 Bean만 주입되고, MockMvc를 알아볼 수 있게 한다.
-                       * MockMvc는 웹 어플리케이션을 어플리케이션 서버에 배포하지않고, 가짜로 테스트용 MVC 환경을 만들어서 요청 및
- *                       전송, 응답기능을 제공해주는 유틸리티 클래스.
- *                       간단히 말하면, 내가 컨트롤러 테스트 하고 싶을때 실제 서버에 올리지 않고 테스트용으로 시뮬레이션해서 내가
- *                       MVC가 되도록 해주는 클래스
- *                       그냥 컨트롤러 슬라이스 테스트 한다고 하면 @WebMvcTest랑 MockMvc쓰면됨
+                       * MockMvc는 웹 어플리케이션을 어플리케이션 서버에 배포하지않고, 가짜로 테스트용 MVC 환경을 만들어서 요청 및 전송, 응답기능을 제공해주는 유틸리티 클래스.
+ *             간단히 말하면, 내가 컨트롤러 테스트 하고 싶을때 실제 서버에 올리지 않고 테스트용으로 시뮬레이션해서 내가
+ *             MVC가 되도록 해주는 클래스 그냥 컨트롤러 슬라이스 테스트 한다고 하면 @WebMvcTest랑 MockMvc쓰면됨
  *  2) @DataJpaTest - JPA 레포지토리 테스트 할때 사용
  *                    @Entity가 있는 엔티티클래스들을 스캔해서 테스트를 위한 JPA레포지토리들을 설정
  *                    * @Component 나 @ConfigurationProperties Bean들은 무시
@@ -42,47 +37,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 //@WebMvcTest
-@Disabled("Spring Data Rest 통합데이터는 현재 불필요하므로 제외시킴")
-/** 클래스 레벨에 붙여서 해당 테스트 클래스의 모든 메서드들을 체크하지 않게 한다.
- * 이유는 테스트가 다 통과한걸 확인했고, 당장 개발하는데 계속 돌릴 필요 없기때문  */
 @SpringBootTest /* 이것만 있으면 MockMvc를 알아볼수가 없어서 @AutoConfigureMockMvc도 같이넣기 */
 @AutoConfigureMockMvc
 @Transactional /* 테스트를 돌리면 Hibernate부분에 select 쿼리문이 나오면서 실제 DB를 건드리는데, 테스트 끝난이후에 DB를 롤백시키는 용도*/
-public class DataRestTest {
-    /** MockMvc 테스트 방법 5가지가 있다.
-     * 1) MockMvc 생성(빈 준비)
-     * 2) MockMvc에게 요청에 대한 정보를 입력
-     * 3) 요청에 대한 응답값을 expect를 이용해서 테스트 한다.
-     * 4) expect를 다 통과하면 테스틑 통과
-     */
-
+public class Ex07_3_03_DataRestTest_모든테스트완료 {
     private final MockMvc mvc; // 1) MockMvc 생성(빈 준비)
 
-    public DataRestTest(@Autowired MockMvc mvc) { // 2) MockMvc에게 요청에 대한 정보를 입력
+    public Ex07_3_03_DataRestTest_모든테스트완료(@Autowired MockMvc mvc) { // 2) MockMvc에게 요청에 대한 정보를 입력
         this.mvc = mvc;
     }
 
-    //    @Disabled("구현중")
-    /* [api] - 게시글 리스트 전체 조회 */
-    @DisplayName("[api] - 게시글 리스트 전체 조회 ")
-    @Test
-    void articles() throws Exception {
-        /** 일단 이 테스트는 실패해야 정상임, 이유는 해당 api를 찾을 수 없기 때문에
-            콘솔창에 MockHttpServletRequest 부분에 URI="/api/articles" 있을거다 복사해서 브라우저에
-            http://localhost:8080/api/articles 넣어보면 데이터가 제대로 나온다.
-            그럼 왜 여기선 안되냐면, @WebMvcTest는 슬라이스 테스트이기 때문에 Controller외의 빈들은 로드하지않았기 때문이다.
-
-            그래서 일단 @WebMvcTest 대신 통합테스트(@SpringBootTest)로 돌릴거다.
-         */
-
-        mvc.perform(get("/api/articles"))
-                .andExpect(status().isOk()) // 현재 200이 들어왔는지 확인
-                                            // MockMvcResultMatchers.status
-                .andExpect(content().contentType(MediaType.valueOf("application/hal+json")));
-        // mock 관련된 자동완성이 없다면 deep dive방식(ctrl+space) 그리고 import alt+ent
-        // 서버 잘갔다왔냐? content 타입이 맞느냐?
-    }
-    //    @Disabled("구현중")
     /* [api] - 게시글 리스트 전체 조회 */
     @DisplayName("[api] - 게시글 리스트 전체 조회 ")
     @Test
@@ -125,4 +89,5 @@ public class DataRestTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.valueOf("application/hal+json")));
     }
+
 }
