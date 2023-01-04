@@ -1,6 +1,7 @@
 package com.bitstudy.app.controller;
 
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import java.util.List;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /** 뷰 엔드포인트 관련 컨트롤러
@@ -25,16 +27,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 그외에 css, img 그리고 js들은 resources > static 폴더 안에 작성가능
  * */
 
+@Controller
 @RequestMapping("/articles") // 모든 경로들은 /articles로 시작하니까 클래스 레벨에 1차로 @RequestMapping("/articles") 걸어놨음
 public class ArticleController {
     /* BDD하러 가기*/
-
-
     @GetMapping
     public String articles(ModelMap map) {
         /** ModelMap: 테스트파일에서 .andExpect(model().attributeExists("articles"));를 이용해서 articles라는 키 값으로
          *  데이터를 넣어주기로 했으니까 필요함
-         *  Model과 ModelMap은 같ㅇ느거임. 차이점은 Model은 인터페이스, ModelMap은 클래스(구현체)
+         *  Model과 ModelMap은 같은거임. 차이점은 Model은 인터페이스, ModelMap은 클래스(구현체)
          *  */
         map.addAttribute("articles", List.of()); // 키: articles, 값: 그냥 list
         return "articles/index";
