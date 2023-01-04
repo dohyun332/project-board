@@ -43,6 +43,7 @@ class ArticleControllerTest {
 
     /* 1) 게시판(리스트) 페이지*/
     @Test
+    @DisplayName("[view][GET] 게시글 리스트(게시판) 페이지 - 정상호출")
     public void articlesAll() throws Exception{
         mvc.perform(get("/articles"))
                 .andExpect(status().isOk())
@@ -56,5 +57,36 @@ class ArticleControllerTest {
                 // 이 뷰에서는 게시글들이 떠야 하는데, 그 말은 서버에서 데이터들을 가져왔다는 말이다. 그러면 모델 어트리뷰트로 데이터를 밀어넣어줬다는 말인데 그게 있는지없는지 확인
                 // model().attributeExists("articles) <- articles는 개발자가 임의로 걸어주는 키값, 맵에 articles라는 키가 있는지 검색해라 라는 뜻
     }
+    /* 2) 게시판(상세) 페이지*/
+    @Test
+    @DisplayName("[view][GET] 게시글 상세 페이지 - 정상호출")
+    public void articlesOne() throws Exception{
+        mvc.perform(get("/articles/1")) // 테스트니까 그냥 1번글 가져와라 할거임
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(view().name("articles/detail"))
+                .andExpect(model().attributeExists("article"))
+                .andExpect(model().attributeExists("articleComments"));
+                // 상세페이지에는 댓글들도 같이 오니까 모델 어트리뷰트에 articleComments 키가 있는지 확인
+    }
 
+    /* 3) 게시판 검색 전용*/
+    @Test
+    @DisplayName("[view][GET] 게시글 검색 전용 페이지 - 정상호출")
+    public void articlesSearch() throws Exception {
+        mvc.perform(get("/articles/search"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(view().name("articles/search"));
+    }
+
+    /* 4) 해시태그 검색 전용 페이지*/
+    @Test
+    @DisplayName("[view][GET] 게시글 검색 전용 페이지 - 정상호출")
+    public void articlesSearchHashtag() throws Exception {
+        mvc.perform(get("/articles/search-hashtag"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(view().name("articles/search-hashtag"));
+    }
 }
