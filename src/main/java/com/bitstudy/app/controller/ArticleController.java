@@ -1,10 +1,15 @@
 package com.bitstudy.app.controller;
 
+
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 /** 뷰 엔드포인트 관련 컨트롤러
  *
@@ -24,6 +29,7 @@ import java.util.List;
 public class ArticleController {
     /* BDD하러 가기*/
 
+
     @GetMapping
     public String articles(ModelMap map) {
         /** ModelMap: 테스트파일에서 .andExpect(model().attributeExists("articles"));를 이용해서 articles라는 키 값으로
@@ -33,4 +39,6 @@ public class ArticleController {
         map.addAttribute("articles", List.of()); // 키: articles, 값: 그냥 list
         return "articles/index";
     }
+
+
 }
