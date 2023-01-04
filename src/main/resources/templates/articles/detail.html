@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>게시판 페이지</title>
+</head>
+<body>
+<header id="header">헤더</header>
+
+
+<main id="article-main">
+  <header>1번글</header>
+  <aside>
+    <p>bitstudy</p>
+    <p><a href="mailto:goodjob0412@gmail.com">goodjob0412@gmail.com</a>goodjob0412@gmail.com</p>
+    <p>2023-01-04</p>
+    <p>#java</p>
+  </aside>
+
+  <section>
+    <p>본문</p>
+    <br /><br />
+    <div>
+      댓글 입력부
+      <form>
+        <label>댓글</label>
+        <textarea placeholder="댓글 쓰기"></textarea>
+        <button type="submit"></button>
+      </form>
+      댓글나오는부분
+      <ul>
+        <li>
+          <strong>goodjob</strong>
+          <time><small>2023-01-04</small></time>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quisquam distinctio neque dicta possimus, minima, iusto odio libero, aspernatur corporis voluptate officia voluptates eveniet et hic nemo asperiores minus cupiditate?
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+<!--  페이지네이션 -->
+  <nav>
+
+  </nav>
+
+</main>
+
+
+<footer id="footer">푸터</footer>
+
+</body>
+</html>

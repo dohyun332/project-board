@@ -37,7 +37,7 @@ public interface ArticleRepository extends
          *     id는 인증기능 달아서 유저 정보를 알아올 수 있을때 할거임.
          *     including 사용법: 'root.필드명'
          * */
-        bindings.including(root.title, root.content, root.createAt, root.createBy, root.hashtag);
+        bindings.including(root.title, root.content, root.createdAt, root.createdBy, root.hashtag);
 
         /** 3. 정확한 검색만 되었었는데 'or검색' 가능하게 바꾸기 */
         // 네이버 같은 경우는 or검색이다 띄어쓰기 시 or로 인식, 바인딩은 한줄에 하나씩밖에 못건다.
@@ -46,8 +46,8 @@ public interface ArticleRepository extends
 
         bindings.bind(root.title).first(StringExpression::containsIgnoreCase); // like '%#{문자열}%'
         bindings.bind(root.content).first(StringExpression::containsIgnoreCase);
-        bindings.bind(root.createAt).first(DateTimeExpression::eq); // 이건 날짜니까 DateTimeExpression으로하고, eq는 equals의 의미, 날짜필드는 정확한 검색만 되도록 설정, 근데 이렇게하면 시분초가 다 0으로 인식됨, 이부분은 별도로 시간처리할때 건드릴 거임
-        bindings.bind(root.createBy).first(StringExpression::containsIgnoreCase);
+        bindings.bind(root.createdAt).first(DateTimeExpression::eq); // 이건 날짜니까 DateTimeExpression으로하고, eq는 equals의 의미, 날짜필드는 정확한 검색만 되도록 설정, 근데 이렇게하면 시분초가 다 0으로 인식됨, 이부분은 별도로 시간처리할때 건드릴 거임
+        bindings.bind(root.createdBy).first(StringExpression::containsIgnoreCase);
         bindings.bind(root.hashtag).first(StringExpression::containsIgnoreCase);
     }
 

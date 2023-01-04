@@ -3,14 +3,12 @@ package com.bitstudy.app.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /** 뷰 엔드포인트 관련 컨트롤러
@@ -39,6 +37,15 @@ public class ArticleController {
          *  */
         map.addAttribute("articles", List.of()); // 키: articles, 값: 그냥 list
         return "articles/index";
+    }
+
+    @GetMapping("/{articleId}")
+    public String article(ModelMap map, @PathVariable Long articleId) {
+        map.addAttribute("article", "aaa");
+        // 지금당장은 받아오지 않기 때문에 null이라고 넣었지만, 테스트할때는 뭐라도 문자열을 넣어서 모델에 담기도록한다.
+        map.addAttribute("articleComments", List.of());
+
+        return "articles/detail";
     }
 
 
