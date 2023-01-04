@@ -1,9 +1,21 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <!-- xmlns:th="http://www.thymeleaf.org"
      이걸 넣으면 이 문서는 타임리프 템플릿이다. 라고 알려준다.
      그런데 회색처리 되어있다. 2버전에서는 필수 였는데 3에서부터는 생략해도된다.
      공식문서에는 있으니까 넣어봤음
+-->
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--<html lang="ko">-->
+
+<!-- xmlns:th="http://www.thymeleaf.org"
+     이걸 넣으면 이 문서는 타임리프 템플릿이다. 라고 알려준다.
+     그런데 회색처리 되어있다. 2버전에서는 필수 였는데 3에서부터는 생략해도된다.
+     공식문서에는 있으니까 넣어봤음
+-->
+<!-- 타임리프의 deCoupled 로직 적용하기
+    여기 파일은 다 HTML로만 구성
+    th:replqce 들은 삭제
 -->
 <head>
     <meta charset="UTF-8">
@@ -21,12 +33,13 @@
     th:replace="~{파일명 :: 설렉터}"
  -->
 <!--<header th:insert="~{header :: #header}"></header>-->
-<header th:replace="~{header :: #header}"></header>
+<header id="header">헤더</header>
 <!--<header th:replace="~header :: #header"></header>-->
 
     <main id="main">
         <form action="#">
-            <select id="search-type">
+            <label for="search-type">유형</label>
+            <select id="search-type" name="search-type">
                 <option value="">제목</option>
                 <option value="">본문</option>
                 <option value="">id</option>
@@ -34,6 +47,7 @@
                 <option value="">해시태그</option>
             </select>
 
+            <label for="search-value" hidden>검색어</label>
             <input type="search" placeholder="검색어를 입력하세요" name="search-value" id="search-value">
 
             <button type="submit">검색</button>
@@ -89,6 +103,8 @@
         </nav>
     </main>
 
+
+<footer id="footer">푸터</footer>
 <!--    <footer>-->
 <!--        <hr />-->
 <!--        푸터</footer>-->
