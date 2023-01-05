@@ -12,7 +12,7 @@ import java.util.Optional;
  *  간단히 말해서 @Configuration달아놓으면 시스템이 "이거 설정파일이야, Bean으로 등록해줘"라는 뜻
  */
 @Configuration
-
+// 안달아주면 컴퓨터가 config 파일인지 모른다.
 /** JPA에서 auditing 가능하게 하는 어노테이션
  *  jpa auditing 이란: Spring Data jpa에서 자동으로 값을 넣어주는 기능.
  *         jpa에서 자동으로 세팅하게 해줄때 사용하는 기능인데, 특정 데이터를 보고 있다가 생성, 수정되면 자동으로 값을 넣어주는 기능
