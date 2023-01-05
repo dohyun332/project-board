@@ -59,3 +59,6 @@ spring:
 #      ALL : 모든 레포지토리
 #      ANNOTATED - 지정한 것만 노출
 #      VISIBILITY - 레포지토리를 public으로 노출한 것만
+
+thymeleaf3: #thymeleaf3 이름은 @ConfigurationProperties("spring.thymeleaf3")에서 가져옴
+  decoupled-logic: true # false로 주면 타임리프 기능 사용 안한다는 뜻

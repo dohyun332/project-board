@@ -35,12 +35,12 @@ import java.util.Set;
  *  @MappedSuperClass는 표준 JPA에서 제공해주는 클래스, 중간단계 따로없이 바로동작
  */
 //@EntityListeners(AuditingEntityListener.class)
-/* 이거없으면 테스트할때 createAt 때문에 에러남(Ex04 관련) 메타데이터 추출했기에 추출한곳으로 이동*/
+/* 이거없으면 테스트할때 createdAt 때문에 에러남(Ex04 관련) 메타데이터 추출했기에 추출한곳으로 이동*/
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "hashtag"),
-        @Index(columnList = "createAt"),
-        @Index(columnList = "createBy")
+        @Index(columnList = "createdAt"),
+        @Index(columnList = "createdBy")
 }) // 용량때문에 성능이 느려질수 있으니 잘사용하는것만, 검색 속도 증가시키기위한 색인
 @Entity /* 1) 롬복을 이용해서 클래스를 앤티티로 변경 @Entity가 붙은 클래스는 JPA가 관라하게된다.
               그래서 기본키(PK)가 뭔지 알려줘야한다. 그게 @Id 에너테이션이다. */
@@ -72,8 +72,8 @@ public class Article extends AuditingFields {
 
     /* embedded 방식
     class Tmp {
-        @CreatedDate @Column(nullable = false) private LocalDateTime createAt; // 생성일시
-        @CreatedBy @Column(nullable = false, length = 100) private String createBy; // 생성자
+        @CreatedDate @Column(nullable = false) private LocalDateTime createdAt; // 생성일시
+        @CreatedBy @Column(nullable = false, length = 100) private String createdBy; // 생성자
         @LastModifiedDate @Column(nullable = false) private LocalDateTime modifiedAt; // 수정일시
         @LastModifiedBy @Column(nullable = false, length = 100) private String modifiedBy; // 수정자
     }
@@ -84,11 +84,11 @@ public class Article extends AuditingFields {
     // 메타데이터
 //    @CreatedDate
 //    @Column(nullable = false)
-//    private LocalDateTime createAt; // 생성일시
+//    private LocalDateTime createdAt; // 생성일시
 //
 //    @CreatedBy
 //    @Column(nullable = false, length = 100)
-//    private String createBy; // 생성자
+//    private String createdBy; // 생성자
 
 //    @LastModifiedDate
 //    @Column(nullable = false)

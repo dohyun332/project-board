@@ -31,8 +31,8 @@ import java.util.Objects;
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "hashtag"),
-        @Index(columnList = "createAt"),
-        @Index(columnList = "createBy")
+        @Index(columnList = "createdAt"),
+        @Index(columnList = "createdBy")
 }) // 용량때문에 성능이 느려질수 있으니 잘사용하는것만, 검색 속도 증가시키기위한 색인
 @Entity /* 1) 롬복을 이용해서 클래스를 앤티티로 변경 @Entity가 붙은 클래스는 JPA가 관라하게된다.
               그래서 기본키(PK)가 뭔지 알려줘야한다. 그게 @Id 에너테이션이다. */
@@ -80,11 +80,11 @@ public class Ex01_1_Article_엔티티로변경 {
     // 메타데이터
     @CreatedDate
     @Column(nullable = false)
-    private LocalDateTime createAt; // 생성일시
+    private LocalDateTime createdAt; // 생성일시
 
     @CreatedBy
     @Column(nullable = false, length = 100)
-    private String createBy; // 생성자
+    private String createdBy; // 생성자
     /** 다른 생성일시 같은것들은 알아낼 수있는데, 최초 생성자는 (현재 코드에서는)인증받고 오지 않았기 때문에
      *  따로 알아낼 수가 없다. 좀전에 만든 JpaConfig파일을 사용한다. */
 

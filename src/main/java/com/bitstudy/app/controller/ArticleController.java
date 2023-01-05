@@ -1,9 +1,9 @@
 package com.bitstudy.app.controller;
 
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,19 +25,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 그외에 css, img 그리고 js들은 resources > static 폴더 안에 작성가능
  * */
 
+@Controller
 @RequestMapping("/articles") // 모든 경로들은 /articles로 시작하니까 클래스 레벨에 1차로 @RequestMapping("/articles") 걸어놨음
 public class ArticleController {
     /* BDD하러 가기*/
-
-
     @GetMapping
     public String articles(ModelMap map) {
         /** ModelMap: 테스트파일에서 .andExpect(model().attributeExists("articles"));를 이용해서 articles라는 키 값으로
          *  데이터를 넣어주기로 했으니까 필요함
-         *  Model과 ModelMap은 같ㅇ느거임. 차이점은 Model은 인터페이스, ModelMap은 클래스(구현체)
+         *  Model과 ModelMap은 같은거임. 차이점은 Model은 인터페이스, ModelMap은 클래스(구현체)
          *  */
         map.addAttribute("articles", List.of()); // 키: articles, 값: 그냥 list
         return "articles/index";
+    }
+
+    @GetMapping("/{articleId}")
+    public String article(ModelMap map, @PathVariable Long articleId) {
+        map.addAttribute("article", "aaa");
+        // 지금당장은 받아오지 않기 때문에 null이라고 넣었지만, 테스트할때는 뭐라도 문자열을 넣어서 모델에 담기도록한다.
+        map.addAttribute("articleComments", List.of());
+
+        return "articles/detail";
     }
 
 
