@@ -1,25 +1,25 @@
 package com.bitstudy.app.controller;
 
+import com.bitstudy.app.config.SecurityConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-/** 하기전에 알아둘것: 이테스트 코드를 작성하고 돌리면 결과적으로 404에러난다.
- *  이유는 아직 ArticleController에 작성된 내용이 없고, dao같은 것들도 없기 때문이다.
- *
- *  우선 작성하고 실제코드(ArticleController)와 연결되는지 확인.
- *
- *  슬라이스 테스트 방식으로 테스트 할거임
- * */
+/* 지금 상태로 테스트 돌리면 콘솔창에 401이 뜬다.
+  (401: 파일을 찾긴 찾았는데 인증을 못받아서 못들어간다 라는 뜻)
+  이유는 기본 웹 시큐리티를 불러와서 그런거다.
+  config > SecurityConfig를 읽어오게 하면 된다.
+  방법 :@Import(SecurityConfig.class)를 클래스 레벨에 넣어서 현재 이 테스트코드에서도 읽히게 해줌
+*/
 
-/* autoConfiguration을 가져올 필요가 없기 때문에 슬라이스 테스트 사용가능 */
-//@WebMvcTest // 이렇게만 쓰면 모든 컨트롤러들 다 읽어 들인다. 지금은 컨트롤러 디렉토리에 파일이 하나밖에 없어서 상관없지만 많아지면 모든 컨트롤러들을 bean으로 읽어오기 때문에 아래처럼 필요한 클래스만 넣어주면 됨
+@Import(SecurityConfig.class)
 @WebMvcTest(ArticleController.class)
 @DisplayName("view 컨트롤러 - 게시글")
 class ArticleControllerTest {
@@ -48,14 +48,9 @@ class ArticleControllerTest {
         mvc.perform(get("/articles"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                // 뷰를 만들고 있으니까 html로 코드를 짜고 있을거임. /articles로 받아온 데이터의 미디어 타입이 html타입으로 되어 있는지 확인
-                // contentType의 경우 exact match라서 미디어 타입이 딱 text/html로 나오는 것만 허용하기 때문에
-                // contentTypeCompatibleWith를 이용해서 호환되는 타입까지 맞다고 쳐주는거
                 .andExpect(view().name("articles/index"))
-                // 가져온 뷰 파일명이 index인지 확인
                 .andExpect(model().attributeExists("articles"));
-                // 이 뷰에서는 게시글들이 떠야 하는데, 그 말은 서버에서 데이터들을 가져왔다는 말이다. 그러면 모델 어트리뷰트로 데이터를 밀어넣어줬다는 말인데 그게 있는지없는지 확인
-                // model().attributeExists("articles) <- articles는 개발자가 임의로 걸어주는 키값, 맵에 articles라는 키가 있는지 검색해라 라는 뜻
+
     }
     /* 2) 게시판(상세) 페이지*/
     @Test

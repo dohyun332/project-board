@@ -11,7 +11,8 @@ import javax.persistence.*;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-@Entity /* 테이블과의 매핑한다는 뜻,
+//@Entity
+/* 테이블과의 매핑한다는 뜻,
            JPA가 관리한다.
            PK가 알아볼수 있게 필드들 중 하나에 @Id 어노테이션 달아줘야 한다. */
 @Getter

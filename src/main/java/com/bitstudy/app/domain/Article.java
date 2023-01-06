@@ -3,6 +3,7 @@ package com.bitstudy.app.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -45,13 +46,18 @@ import java.util.Set;
 @Entity /* 1) 롬복을 이용해서 클래스를 앤티티로 변경 @Entity가 붙은 클래스는 JPA가 관라하게된다.
               그래서 기본키(PK)가 뭔지 알려줘야한다. 그게 @Id 에너테이션이다. */
 @Getter // 롬복에 쓰면 알아서 모든 필드의 getter들이 생성
-@ToString
+@ToString(callSuper = true) // 저 아래 상위요소인 UserAccount의 toString까지 출력할 수 있도록 callSuper를 넣음
 public class Article extends AuditingFields {
     // 인터페이스의 abstract는 public default밖에 못쓰니 private에 적합x
 
     @Id // 전체 필드 중에서 이것이 pk라고 지정, @Id가 없으면 @Entity 에러 발생
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    /** 새로추가 */
+    @Setter
+    @ManyToOne(optional = false) // 단방향
+    private UserAccount userAccount;
 
     @Setter
     @Column(nullable = false)
@@ -65,7 +71,8 @@ public class Article extends AuditingFields {
     private String hashtag; // 해시태그
 
     /** 양방향 바인딩 */
-    @OrderBy("id") // 양방향 바인딩을 할건데 정렬 기준을 id로 하겠다는 뜻
+//    @OrderBy("id") // 양방향 바인딩을 할건데 정렬 기준을 id로 하겠다는 뜻
+    @OrderBy("createdAt desc") // 댓글리스트를 최근 시간거로 정렬되도록 바꿈
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     @ToString.Exclude
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
@@ -112,14 +119,15 @@ public class Article extends AuditingFields {
     protected Article() { }
 
     /* 사용자가 입력하는 값만 받기, 나머지는 시스템이 알아서 하게 해주면 됨 */
-    private Article(String title, String content, String hashtag) {
+    private Article(UserAccount userAccount,String title, String content, String hashtag) {
+        this.userAccount = userAccount;
         this.title = title;
         this.content = content;
         this.hashtag = hashtag;
     }
 
-    public static Article of(String title, String content, String hashtag) {
-        return new Article(title, content, hashtag);
+    public static Article of(UserAccount userAccount, String title, String content, String hashtag) {
+        return new Article(userAccount, title, content, hashtag);
     }
 
     @Override

@@ -36,7 +36,8 @@ import java.util.Set;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 }) // 용량때문에 성능이 느려질수 있으니 잘사용하는것만, 검색 속도 증가시키기위한 색인
-@Entity /* 1) 롬복을 이용해서 클래스를 앤티티로 변경 @Entity가 붙은 클래스는 JPA가 관라하게된다.
+//@Entity
+/* 1) 롬복을 이용해서 클래스를 앤티티로 변경 @Entity가 붙은 클래스는 JPA가 관라하게된다.
               그래서 기본키(PK)가 뭔지 알려줘야한다. 그게 @Id 에너테이션이다. */
 @Getter // 롬복에 쓰면 알아서 모든 필드의 getter들이 생성
 @ToString

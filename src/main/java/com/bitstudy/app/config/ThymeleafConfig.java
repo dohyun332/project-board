@@ -13,7 +13,7 @@ public class ThymeleafConfig {
     /** @Bean 영역에 thymeleaf3Properties랑
      *  @ConfigurationProperties 부분에 빨간 밑줄 생긴다.
      *  빨간 밑줄 없애기 위해서 메인파일(AppApplication.java)로 가서
-     *  @ConfigurationProperties 애너테이션 넣기
+     *  @ConfigurationPropertiesScan 애너테이션 넣기
      * */
 
     @Bean
