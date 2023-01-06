@@ -14,6 +14,12 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<!--  헤더, 푸터 관련  -->
+    <link rel="stylesheet" href="/css/h_f.css">
+<!-- 본문의 검색  -->
+    <link rel="stylesheet" href="/css/search_bar.css">
+
 </head>
 <body>
 <!-- 이 파일이 있어야 EX08_2번 테스트의 articlesAll() 테스트를 돌려볼수 있음
@@ -27,27 +33,60 @@
     th:replace="~{파일명 :: 설렉터}"
  -->
 <!--<header th:insert="~{header :: #header}"></header>-->
-<header id="header">헤더</header>
-<!--<header th:replace="~header :: #header"></header>-->
+<!--<header id="header"></header>-->
+<header th:replace="header :: #header"></header>
 
-    <main id="main">
-        <form action="#">
-            <label for="search-type">유형</label>
-            <select id="search-type" name="search-type">
-                <option value="">제목</option>
-                <option value="">본문</option>
-                <option value="">id</option>
-                <option value="">닉네임</option>
-                <option value="">해시태그</option>
-            </select>
+    <main class="container" id="main">
+<!--        <form action="#">-->
+<!--            <label for="search-type">유형</label>-->
+<!--            <select id="search-type" name="search-type">-->
+<!--                <option value="">제목</option>-->
+<!--                <option value="">본문</option>-->
+<!--                <option value="">id</option>-->
+<!--                <option value="">닉네임</option>-->
+<!--                <option value="">해시태그</option>-->
+<!--            </select>-->
 
-            <label for="search-value" hidden>검색어</label>
-            <input type="search" placeholder="검색어를 입력하세요" name="search-value" id="search-value">
+<!--            <label for="search-value" hidden>검색어</label>-->
+<!--            <input type="search" placeholder="검색어를 입력하세요" name="search-value" id="search-value">-->
 
-            <button type="submit">검색</button>
-        </form>
+<!--            <button type="submit">검색</button>-->
+<!--        </form>-->
+            <div class="row">
+                <div class="col-lg-12 card-margin">
+                    <div class="card search-form">
+                        <div class="card-body p-0">
+                            <form id="search-form">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row no-gutters">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                                <select class="form-control" id="exampleFormControlSelect1">
+                                                    <option>제목</option>
+                                                    <option>본문</option>
+                                                    <option>id</option>
+                                                    <option>닉네임</option>
+                                                    <option>해시태그</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-8 col-md-6 col-sm-12 p-0">
+                                                <input type="text" placeholder="Search..." class="form-control" id="search" name="search">
+                                            </div>
+                                            <div class="col-lg-1 col-md-3 col-sm-12 p-0">
+                                                <button type="submit" class="btn btn-base">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>제목</th>
@@ -80,27 +119,46 @@
         </table>
 
 <!--   페이지네이션     -->
-        <nav>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>이전</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>이후</td>
-                    </tr>
-                </tbody>
-            </table>
+<!--        <nav>-->
+<!--            <table>-->
+<!--                <tbody>-->
+<!--                    <tr>-->
+<!--                        <td>이전</td>-->
+<!--                        <td>1</td>-->
+<!--                        <td>2</td>-->
+<!--                        <td>3</td>-->
+<!--                        <td>4</td>-->
+<!--                        <td>5</td>-->
+<!--                        <td>이후</td>-->
+<!--                    </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </nav>-->
+        <nav class="d-flex justify-content-center">
+            <ul class="pagination pagination-base pagination-boxed pagination-square mb-0">
+                <li class="page-item">
+                    <a class="page-link no-border" href="#">
+                        <span aria-hidden="true">«</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item active"><a class="page-link no-border" href="#">1</a></li>
+                <li class="page-item"><a class="page-link no-border" href="#">2</a></li>
+                <li class="page-item"><a class="page-link no-border" href="#">3</a></li>
+                <li class="page-item"><a class="page-link no-border" href="#">4</a></li>
+                <li class="page-item">
+                    <a class="page-link no-border" href="#">
+                        <span aria-hidden="true">»</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
         </nav>
     </main>
 
+<!--<footer id="footer">푸터</footer>-->
+<header th:replace="footer :: #footer"></header>
 
-<footer id="footer">푸터</footer>
-<!--    <footer>-->
-<!--        <hr />-->
-<!--        푸터</footer>-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
