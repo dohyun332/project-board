@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public record UserAccountDto(
         Long id,
-        String user_id,
+        String userId,
         String user_password,
         String email,
         String nickname,
@@ -18,14 +18,14 @@ public record UserAccountDto(
         String modifiedBy
 ) {
 
-    public static UserAccountDto of(Long id, String user_id, String user_password, String email, String nickname, String memo, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String modifiedBy) {
-        return new UserAccountDto(id, user_id, user_password, email, nickname, memo, createdAt, createdBy, modifiedAt, modifiedBy);
+    public static UserAccountDto of(Long id, String userId, String user_password, String email, String nickname, String memo, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String modifiedBy) {
+        return new UserAccountDto(id, userId, user_password, email, nickname, memo, createdAt, createdBy, modifiedAt, modifiedBy);
     }
 
     public static UserAccountDto from(UserAccount entity) {
        return new UserAccountDto(
                entity.getId(),
-               entity.getUser_id(),
+               entity.getUserId(),
                entity.getUser_password(),
                entity.getEmail(),
                entity.getNickname(),
@@ -39,7 +39,7 @@ public record UserAccountDto(
 
     public UserAccount toEntity() {
         return UserAccount.of(
-                user_id,
+                userId,
                 user_password,
                 email,
                 nickname,

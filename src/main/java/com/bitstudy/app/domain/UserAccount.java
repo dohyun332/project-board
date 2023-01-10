@@ -10,7 +10,7 @@ import java.util.Objects;
 /** 회원 관리에 대한 부분 Auditing까지 연결(상속)해서 사용해야함 */
 
 @Table(indexes = {
-        @Index(columnList = "user_id"),
+        @Index(columnList = "userId"),
         @Index(columnList = "email", unique = true),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
@@ -25,7 +25,7 @@ public class UserAccount extends AuditingFields {
 
     @Setter
     @Column(nullable = false, length = 50)
-    private String user_id;
+    private String userId;
 
     @Setter
     @Column(nullable = false)
@@ -44,16 +44,16 @@ public class UserAccount extends AuditingFields {
 
     protected UserAccount() {}
 
-    private UserAccount(String user_id, String user_password, String email, String nickname, String memo) {
-        this.user_id = user_id;
+    private UserAccount(String userId, String user_password, String email, String nickname, String memo) {
+        this.userId = userId;
         this.user_password = user_password;
         this.email = email;
         this.nickname = nickname;
         this.memo = memo;
     }
 
-    public static UserAccount of(String user_id, String user_password, String email, String nickname, String memo) {
-        return new UserAccount(user_id, user_password, email, nickname, memo);
+    public static UserAccount of(String userId, String user_password, String email, String nickname, String memo) {
+        return new UserAccount(userId, user_password, email, nickname, memo);
     }
 
     @Override

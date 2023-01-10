@@ -34,6 +34,8 @@ public record ArticleCommentDto(
         );
     }
 
+    /** 위에거랑 반대. dto를 주면 엔티티를 생서하는 메서드 */
+    // DTO 정보로 부터 엔티티를 하나 만들어서 세이브 하는 코드임
     public ArticleComment toEntity(Article entity) {
         return ArticleComment.of(
                 entity,
