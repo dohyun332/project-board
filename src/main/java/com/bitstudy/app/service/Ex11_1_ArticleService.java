@@ -2,7 +2,6 @@ package com.bitstudy.app.service;
 
 import com.bitstudy.app.domain.Article;
 import com.bitstudy.app.domain.type.SearchType;
-import com.bitstudy.app.dto.ArticleCommentDto;
 import com.bitstudy.app.dto.ArticleDto;
 import com.bitstudy.app.dto.ArticleWithCommentsDto;
 import com.bitstudy.app.repository.ArticleRepository;
@@ -22,7 +21,7 @@ import javax.persistence.EntityNotFoundException;
 @Service
 @RequiredArgsConstructor // 필수 필드에 대한 생성자를 자동으로 만들어주는 롬복 애너테이션
 @Transactional // 이 클래스 동작하다가 하나라도 잘못되면 다시 롤백 시켜라 뜻
-public class ArticleService {
+public class Ex11_1_ArticleService {
     private final ArticleRepository articleRepository;
     // 아티클 관련 서비스이기때문에 ArticleRepository 필요
 
@@ -100,6 +99,8 @@ public class ArticleService {
         try {
             Article article = articleRepository.getReferenceById(dto.id());
             /* 매개변수 dto로 받은 title, content는 not null 필드기 때문에 if로 감싸서 null이 아닌 경우에만 동작하도록함 */
+            // 원래 update는 먼저 select쿼리를써서 가져오고 있으면 update함, getReferenceById는 감시만 하고있다 select하지않고, 그래서 select할 작업하나를 줄인다.
+            // 엔티티(article)에 값이 들어가면 jpa가 알아서 DB에 넣어준다.
             if(dto.title() != null) {
                 article.setTitle(dto.title());
             }

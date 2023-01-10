@@ -1,11 +1,7 @@
 package com.bitstudy.app.controller;
 
 import com.bitstudy.app.config.SecurityConfig;
-import com.bitstudy.app.domain.Article;
-import com.bitstudy.app.dto.ArticleWithCommentsDto;
-import com.bitstudy.app.dto.UserAccountDto;
 import com.bitstudy.app.service.ArticleService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDateTime;
-import java.util.Set;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -37,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Import(SecurityConfig.class)
 @WebMvcTest(ArticleController.class)
 @DisplayName("view 컨트롤러 - 게시글")
-class ArticleControllerTest {
+class Ex09_3_2_ArticleControllerTest {
     private final MockMvc mvc;
     @MockBean
     private ArticleService articleService;
@@ -46,10 +38,10 @@ class ArticleControllerTest {
      * ArticleController에 있는 private final
      * ArticleService articleService; 부분의 articleService
      * 를 배제하기 위해서 @MockBean 사용함. 이유는 MockMvc가 입출력 관련된 것들만 보게
-     * 하기 위해서 진짜 서비스 로직을 끊어주기 위해 @MockBean사용
+     * 하기 휘해서 진짜 서비스 로직을 끊어주기 위해 @MockBean사용
      * */
 
-    public ArticleControllerTest(@Autowired MockMvc mvc) {
+    public Ex09_3_2_ArticleControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
     }
     /**테스트는 엑셀 api에 있는 순서대로 만들거임
@@ -81,15 +73,11 @@ class ArticleControllerTest {
                 .andExpect(view().name("articles/index"))
                 .andExpect(model().attributeExists("articles"));
 
-        then(articleService).should().searchArticles(eq(null), eq(null), any(Pageable.class));
     }
     /* 2) 게시판(상세) 페이지*/
     @Test
     @DisplayName("[view][GET] 게시글 상세 페이지 - 정상호출")
     public void articlesOne() throws Exception{
-        Long articleId = 1L;
-        given(articleService.getArticle(articleId)).willReturn(createArticleWithCommentsDto());
-
         mvc.perform(get("/articles/1")) // 테스트니까 그냥 1번글 가져와라 할거임
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
@@ -97,17 +85,12 @@ class ArticleControllerTest {
                 .andExpect(model().attributeExists("article"))
                 .andExpect(model().attributeExists("articleComments"));
                 // 상세페이지에는 댓글들도 같이 오니까 모델 어트리뷰트에 articleComments 키가 있는지 확인
-        then(articleService).should().getArticle(articleId);
     }
 
     /* 3) 게시판 검색 전용*/
-    @Disabled("구현중")
     @Test
     @DisplayName("[view][GET] 게시글 검색 전용 페이지 - 정상호출")
     public void articlesSearch() throws Exception {
-        Long articleId = 1L;
-        given(articleService.getArticle(articleId)).willReturn(createArticleWithCommentsDto());
-
         mvc.perform(get("/articles/search"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
@@ -115,7 +98,6 @@ class ArticleControllerTest {
     }
 
     /* 4) 해시태그 검색 전용 페이지*/
-    @Disabled("구현중")
     @Test
     @DisplayName("[view][GET] 게시글 검색 전용 페이지 - 정상호출")
     public void articlesSearchHashtag() throws Exception {
@@ -123,35 +105,5 @@ class ArticleControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/search-hashtag"));
-    }
-
-    private ArticleWithCommentsDto createArticleWithCommentsDto() {
-        return ArticleWithCommentsDto.of(
-                1L,
-                createUserAccountDto(),
-                Set.of(),
-                "title",
-                "content",
-                "#java",
-                LocalDateTime.now(),
-                "bitstudy",
-                LocalDateTime.now(),
-                "bitstudy"
-        );
-    }
-
-    private UserAccountDto createUserAccountDto() {
-        return UserAccountDto.of(
-                1L,
-                "bitstudy",
-                "password",
-                "bitstudy@email.com",
-                "bitstudy",
-                "memo memo",
-                LocalDateTime.now(),
-                "bitstudy",
-                LocalDateTime.now(),
-                "bitstudy"
-        );
     }
 }

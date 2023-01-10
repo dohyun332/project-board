@@ -1,7 +1,6 @@
 package com.bitstudy.app.controller;
 
 import com.bitstudy.app.config.SecurityConfig;
-import com.bitstudy.app.domain.Article;
 import com.bitstudy.app.dto.ArticleWithCommentsDto;
 import com.bitstudy.app.dto.UserAccountDto;
 import com.bitstudy.app.service.ArticleService;
@@ -37,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Import(SecurityConfig.class)
 @WebMvcTest(ArticleController.class)
 @DisplayName("view 컨트롤러 - 게시글")
-class ArticleControllerTest {
+class Ex11_6_ArticleControllerTest {
     private final MockMvc mvc;
     @MockBean
     private ArticleService articleService;
@@ -46,10 +45,10 @@ class ArticleControllerTest {
      * ArticleController에 있는 private final
      * ArticleService articleService; 부분의 articleService
      * 를 배제하기 위해서 @MockBean 사용함. 이유는 MockMvc가 입출력 관련된 것들만 보게
-     * 하기 위해서 진짜 서비스 로직을 끊어주기 위해 @MockBean사용
+     * 하기 휘해서 진짜 서비스 로직을 끊어주기 위해 @MockBean사용
      * */
 
-    public ArticleControllerTest(@Autowired MockMvc mvc) {
+    public Ex11_6_ArticleControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
     }
     /**테스트는 엑셀 api에 있는 순서대로 만들거임
