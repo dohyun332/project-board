@@ -12,12 +12,27 @@ import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import java.util.List;
+
 
 @RepositoryRestResource
 public interface ArticleCommentRepository extends
         JpaRepository<ArticleComment, Long>,
         QuerydslPredicateExecutor<ArticleComment>,
         QuerydslBinderCustomizer<QArticleComment> {
+
+    /** 게시글에 딸려있는 댓글검색 */
+    List<ArticleComment> findByArticle_Id(Long articleId);
+    // 인자로온 1번 게시글의 댓글들을 List에 담아 불러오는 함수
+    /* 중요!!
+       findByArticle_Id : 아직은 자동완성 기능안되지만 일단 findById같은건데
+       _(언더바)의 의미가 별도로 있다. 무작정 붙이는거 아님
+       언더바는 타고 들어갈때 사용됨
+
+       게시글로 댓글을 검색해야 하는데, 이런경우에 사용하는 방법이다.
+       ArticleComment안에는 Article 이랑 UserAccount가 있는데, 그 안에 있는
+       객체 이름인 article쓰고 _(언더바)로 내려가면 그 객체 안으로 들어간다.
+     */
 
     @Override
     default void customize(QuerydslBindings bindings, QArticleComment root) {

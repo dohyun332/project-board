@@ -16,14 +16,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.*;
-import static org.mockito.Mockito.when;
 
 
 /** 서비스 비즈니스 로직은 슬라이스 테스트 기능 사용 안하고 만들어볼거임
@@ -35,8 +33,8 @@ import static org.mockito.Mockito.when;
  * */
 //@WebMvcTest controller가 아니라 쓸수없다.
 @ExtendWith(MockitoExtension.class)
-class ArticleServiceTest {
-    /* Mock을 주입하는 거에다가 @InjectMocks를 달아줘야한다. 그외의 것들한테는 @Mock 달아준다. @ExtendWithd에 사용하는 애너테이션*/
+class Ex11_2_ArticleServiceTest {
+    /* Mock을 주입하는 거에다가 @InjectMocks를 달아줘야한다. 그외의 것들한테는 @Mock 달아준다. */
     @InjectMocks
     private ArticleService sut; // sut - system under test. 테스트 짤때 사용하는 이름 중 하나, 이건 테스트 대상이다 라는 뜻
 
@@ -132,7 +130,8 @@ class ArticleServiceTest {
                 // 레코드에 들어있는 id값 가져오려면 getid()가 아니라 id()
                 // d대신 이걸 불러다 쓸때는 일반필드처럼 가져다 쓰면된다.
                 .willReturn(article);
-        // save써도 되긴하는데 save는 실제 insert문을 날리는데 insert하기전에 jpa에서 select를 해서 있는지 확인한번한다. .getReferenceById()는 기존에 무언가 있는 것에만 사용할 수 있다. .getReferenceById()는 업데이트해야하는 해당 데이터만 참조하고 있다.
+        // save써도 되긴하는데 save는 실제 insert문을 날리는데 insert하기전에 jpa에서 select를 해서 있는지 확인한번한다.
+        // .getReferenceById()는 기존에 무언가 있는 것에만 사용할 수 있다. .getReferenceById()는 업데이트해야하는 해당 데이터만 참조하고 있다.
 
         // When
         sut.updateArticle(dto);
