@@ -29,7 +29,7 @@ public class UserAccount extends AuditingFields {
 
     @Setter
     @Column(nullable = false)
-    private String user_password;
+    private String userPassword;
 
     @Setter
     @Column(length = 100)
@@ -44,16 +44,16 @@ public class UserAccount extends AuditingFields {
 
     protected UserAccount() {}
 
-    private UserAccount(String userId, String user_password, String email, String nickname, String memo) {
+    private UserAccount(String userId, String userPassword, String email, String nickname, String memo) {
         this.userId = userId;
-        this.user_password = user_password;
+        this.userPassword = userPassword;
         this.email = email;
         this.nickname = nickname;
         this.memo = memo;
     }
 
-    public static UserAccount of(String userId, String user_password, String email, String nickname, String memo) {
-        return new UserAccount(userId, user_password, email, nickname, memo);
+    public static UserAccount of(String userId, String userPassword, String email, String nickname, String memo) {
+        return new UserAccount(userId, userPassword, email, nickname, memo);
     }
 
     @Override
