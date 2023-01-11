@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Import(SecurityConfig.class)
 @WebMvcTest(ArticleController.class)
 @DisplayName("view 컨트롤러 - 게시글")
-class ArticleControllerTest {
+class Ex12_3_ArticleControllerTest {
     private final MockMvc mvc;
     @MockBean
     private ArticleService articleService;
@@ -52,7 +52,7 @@ class ArticleControllerTest {
      * 하기 위해서 진짜 서비스 로직을 끊어주기 위해 @MockBean사용
      * */
 
-    public ArticleControllerTest(@Autowired MockMvc mvc) {
+    public Ex12_3_ArticleControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
     }
     /**테스트는 엑셀 api에 있는 순서대로 만들거임
