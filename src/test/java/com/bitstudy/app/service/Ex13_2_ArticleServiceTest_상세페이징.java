@@ -16,14 +16,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.*;
-import static org.mockito.Mockito.when;
 
 
 /** 서비스 비즈니스 로직은 슬라이스 테스트 기능 사용 안하고 만들어볼거임
@@ -35,7 +33,7 @@ import static org.mockito.Mockito.when;
  * */
 //@WebMvcTest controller가 아니라 쓸수없다.
 @ExtendWith(MockitoExtension.class)
-class ArticleServiceTest {
+class Ex13_2_ArticleServiceTest_상세페이징 {
     /* Mock을 주입하는 거에다가 @InjectMocks를 달아줘야한다. 그외의 것들한테는 @Mock 달아준다. @ExtendWithd에 사용하는 애너테이션*/
     @InjectMocks
     private ArticleService sut; // sut - system under test. 테스트 짤때 사용하는 이름 중 하나, 이건 테스트 대상이다 라는 뜻

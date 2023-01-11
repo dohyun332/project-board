@@ -23,8 +23,8 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/articles12_4")
-public class Ex12_4_ArticleController {
+@RequestMapping("/articles13_3")
+public class Ex13_3_ArticleController_상세페이징 {
 
     private final ArticleService articleService;
     private final PaginationService paginationService;
@@ -38,7 +38,7 @@ public class Ex12_4_ArticleController {
             ModelMap map) {
 
 //        map.addAttribute("articles", articleService.searchArticles(searchType,searchValue,pageable).map(ArticleResponse::from));
-/* 새거 */
+
         Page<ArticleResponse> articles = articleService.searchArticles(searchType,searchValue,pageable).map(ArticleResponse::from);
 
         List<Integer> barNumbers = paginationService.getPaginationBarNumbers(pageable.getPageNumber(), articles.getTotalPages());
@@ -62,6 +62,9 @@ public class Ex12_4_ArticleController {
         map.addAttribute("articleComments", article.articleCommentsResponse());
         // article.articleCommentsResponse() 해설: 현재 article에  article.articleCommentsResponse의 정보가 담겨있으니까 article안에 있는 articleComments를 꺼내면 된다.
 //        map.addAttribute("articleComments", List.of());
+
+/* 새로 생성 */
+        map.addAttribute("totalCount", articleService.getArticleCount());
 
         return "articles/detail";
     }

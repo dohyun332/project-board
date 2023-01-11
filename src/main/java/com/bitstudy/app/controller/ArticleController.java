@@ -38,7 +38,7 @@ public class ArticleController {
             ModelMap map) {
 
 //        map.addAttribute("articles", articleService.searchArticles(searchType,searchValue,pageable).map(ArticleResponse::from));
-/* 새거 */
+
         Page<ArticleResponse> articles = articleService.searchArticles(searchType,searchValue,pageable).map(ArticleResponse::from);
 
         List<Integer> barNumbers = paginationService.getPaginationBarNumbers(pageable.getPageNumber(), articles.getTotalPages());
@@ -62,6 +62,9 @@ public class ArticleController {
         map.addAttribute("articleComments", article.articleCommentsResponse());
         // article.articleCommentsResponse() 해설: 현재 article에  article.articleCommentsResponse의 정보가 담겨있으니까 article안에 있는 articleComments를 꺼내면 된다.
 //        map.addAttribute("articleComments", List.of());
+
+/* 새로 생성 */
+        map.addAttribute("totalCount", articleService.getArticleCount());
 
         return "articles/detail";
     }
