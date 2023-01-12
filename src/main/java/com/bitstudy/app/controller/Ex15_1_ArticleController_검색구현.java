@@ -24,8 +24,8 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/articles")
-public class ArticleController {
+@RequestMapping("/articles15_1")
+public class Ex15_1_ArticleController_검색구현 {
 
     private final ArticleService articleService;
     private final PaginationService paginationService;
